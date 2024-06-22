@@ -43,6 +43,6 @@ if prompt:
     st.write(f"Votre question est la suivante :")
     st.write(f"{prompt}")
 
-    st.write(query_rag(prompt))
+    #st.write(query_rag(prompt))
 
 ############### Chat avec l'agent IA ###############

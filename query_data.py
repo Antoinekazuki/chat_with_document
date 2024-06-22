@@ -84,8 +84,7 @@ def query_rag(query_text: str):
         print()
         print(answer[0][2])
 
-    return (index + 1), answer[0][2]
-
+    return None
 
 if __name__ == "__main__":
     main()
