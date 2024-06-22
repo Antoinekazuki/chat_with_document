@@ -79,7 +79,9 @@ def query_rag(query_text: str):
 
         final_list.append(reference_list)
 
-    return final_list, response_text.content
+    return answer, response_text.content
+
+    # return final_list, response_text.content
 
 if __name__ == "__main__":
     main()

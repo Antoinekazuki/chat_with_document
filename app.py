@@ -51,8 +51,10 @@ if prompt:
 
     st.write("Voici la liste des sources utilisées pour produire cet extrait généré par IA :")
 
-    for list in response[0]:
-        st.write(list_display(list))
+    st.write(response[0])
+
+    # for list in response[0]:
+    #     st.write(list_display(list))
 
 
 ############### Chat avec l'agent IA ###############
