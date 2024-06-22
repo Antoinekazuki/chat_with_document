@@ -1,4 +1,4 @@
-from langchain_community.embeddings import GPT4AllEmbeddings
+# from langchain_community.embeddings import GPT4AllEmbeddings
 from langchain_openai import OpenAIEmbeddings
 
 from openai import OpenAI
@@ -17,7 +17,7 @@ import getpass
 # from langchain_community.embeddings import OpenAIEmbeddings
 # openai = OpenAIEmbeddings(openai_api_key="my-api-key")
 
-def get_embedding_function():
-    embeddings = GPT4AllEmbeddings()
-    # embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
-    return embeddings
+# def get_embedding_function():
+#     embeddings = GPT4AllEmbeddings()
+#     # embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
+#     return embeddings
