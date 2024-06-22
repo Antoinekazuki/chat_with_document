@@ -4,4 +4,6 @@ chromadb
 pytest
 boto3
 openai
+langchain
 langchain-community
+langchain_openai
