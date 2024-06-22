@@ -79,7 +79,7 @@ def query_rag(query_text: str):
 
         final_list.append(reference_list)
 
-    return answer, response_text.content
+    return final_list, response_text.content
 
     # return final_list, response_text.content
 
