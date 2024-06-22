@@ -39,10 +39,20 @@ st.markdown('''
              ''')
 prompt = st.chat_input("Votre question")
 
-if prompt:
-    st.write(f"Votre question est la suivante :")
-    st.write(f"{prompt}")
+def list_display(list):
+    st.write(f"Source numéro {list[0]}, extrait du document {list[1]}, page {list[2]}, partie {list[3]} :")
+    st.write(f"{list[4]}")
+    st.write("test")
 
-    #st.write(query_rag(prompt))
+if prompt:
+    response = query_rag(prompt)
+
+    st.write(f"Voici la réponse à votre question : \n{response[1]}")
+
+    st.write("Voici la liste des sources utilisées pour produire cet extrait généré par IA :")
+
+    for list in response[0]:
+        st.write(list_display(list))
+
 
 ############### Chat avec l'agent IA ###############

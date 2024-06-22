@@ -52,13 +52,7 @@ def query_rag(query_text: str):
     model = ChatOpenAI()
     response_text = model.invoke(prompt)
 
-    response = f"Voici la réponse à votre question : \n{response_text.content}"
-    print(response)
-    print()
-
     sources = [doc.metadata.get("id", None) for doc, _score in results]
-
-    print("Voici la liste des sources utilisées pour produire cet extrait généré par IA :")
 
     # Step 1: Connect to the database
     conn = sqlite3.connect('chroma/chroma.sqlite3')
@@ -66,25 +60,26 @@ def query_rag(query_text: str):
     # Step 2: Create a cursor object
     cursor = conn.cursor()
 
+    final_list = []
+
     for index, source in enumerate(sources):
 
+        reference_list = []
         query = "SELECT * FROM embedding_metadata WHERE string_value = ?"
         cursor.execute(query, (source,))
         rows = cursor.fetchall()
         cursor.execute(f"SELECT * FROM embedding_metadata WHERE id={rows[0][0]}")
         answer = cursor.fetchall()
 
-        a = index + 1
-        b = answer[1][2][:-4]
-        c = answer[1][2][-3:-2]
-        d = answer[0][2]
+        reference_list.append(index + 1)
+        reference_list.append(answer[1][2][:-4])
+        reference_list.append(int(answer[1][2][-3:-2]) + 1)
+        reference_list.append(int(answer[1][2][-1]) + 1)
+        reference_list.append(answer[0][2])
 
-        print()
-        print(f"Source numéro {index + 1}, extrait du document \033[1m{answer[1][2][:-4]}\033[0m, page \033[1m{int(answer[1][2][-3:-2]) + 1 }\033[0m, partie \033[1m{int(answer[1][2][-1]) + 1}\033[0m :")
-        print()
-        print(answer[0][2])
+        final_list.append(reference_list)
 
-    return None
+    return final_list, response_text.content
 
 if __name__ == "__main__":
     main()
