@@ -29,7 +29,28 @@ st.markdown('''
              ## 1. Uploadez vos documents :
              ''')
 
+with st.form(key="Form :", clear_on_submit = True):
+    pdf_file = st.file_uploader("Upload vos PDFs ici :", type="pdf")
+    Submit = st.form_submit_button(label='Submit',disabled=True)
+
+if pdf_file:
+    Submit = st.form_submit_button(label='Submit',disabled=False)
+
+# , accept_multiple_files=True
+
+from pathlib import Path
+
+if Submit:
+
+    save_folder = '/Users/antoine/Desktop/Projets/Coding/chat_with_document/data'
+    save_path = Path(save_folder, pdf_file.name)
+    with open(save_path, mode='wb') as w:
+        w.write(pdf_file.getvalue())
+    if save_path.exists():
+        st.success(f'Le PDF {pdf_file.name} a bien été ajouté dans la Base de données. Patientez quelques instants pour le temps de l\'embedding.')
+
 ############### Upload des documents ###############
+
 
 ############### Chat avec l'agent IA ###############
 
@@ -53,6 +74,5 @@ if prompt:
 
     for list in response[0]:
         st.write(list_display(list))
-
 
 ############### Chat avec l'agent IA ###############

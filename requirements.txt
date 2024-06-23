@@ -8,3 +8,4 @@ openai
 langchain
 langchain-community
 langchain_openai
+gpt4all
